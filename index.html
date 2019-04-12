@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang='ja'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='./script/react.development.js'></script>
+  <script src='./script/react-dom.development.js'></script>
+  <script src='./script/react-router-dom.min.js'></script>
+  <script src='./script/babel.min.js'></script>
+  <script src='./script/prop-types.js'></script>
+  <script src='./script/jquery.min.js'></script>
+  <script src='./script/gcube.min.js'></script>
+  <!-- https://github.com/molarmanful/gCube -->
+  <link rel='stylesheet' href='./style.css'>
+  <title>Rubik's</title>
+</head>
+
+<body>
+  <g-cube>
+    <g-speed>700</g-speed>
+    <!-- <g-scramble>D2 R2 F2 R B L U2 F D L2 B2 L2 F' U2 B L2 D2 F2 D2 B</g-scramble> -->
+  </g-cube>
+  <main id='root'></main>
+</body>
+
+<script type='text/babel'>
+  const checkSymbol = v => {
+    switch (v.slice(0, 1)) {
+      case 'R': case 'L': case 'F': case 'B': case 'U': case 'D':
+      case 'M': case 'S': case 'E': case 'X': case 'Y': case 'Z':
+        return v
+    }
+    return ''
+  }
+
+  const convertW = v => {
+    const a = v.slice(0, 1)
+    const b = v.slice(2, 3)
+    switch (a) {
+      case 'R':
+        return [a, "M'"].map(w => w + b)
+      case 'L':
+        return [a, 'M'].map(w => w + b)
+      case 'F':
+        return [a, 'S'].map(w => w + b)
+      case 'B':
+        return [a, "S'"].map(w => w + b)
+      case 'U':
+        return [a, 'E'].map(w => w + b)
+      case 'D':
+        return [a, "E'"].map(w => w + b)
+    }
+    return v
+  }
+
+  const changeRotat = t => $('g-cube').gscramble(
+    t.toUpperCase()
+    .split(' ')
+    .map(v => checkSymbol(v))
+    .map(v => v.slice(1, 2) == 'W' ? convertW(v) : v)
+    .flat()
+    .map(v => v.slice(1, 2) == '3' ? `${v.slice(0, 1)}'` : v)
+    .map(v => v.slice(2, 3) == '3' ? `${v.slice(0, 1)}`  : v)
+    .map(v => v.slice(2, 3) == "'" ? `${v.slice(0, 1)}`  : v)
+    .join(' ')
+  )
+
+  class InputArea extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {solveSymbol: ''}
+      this.changeSolveSymbol = this.changeSolveSymbol.bind(this)
+      this.checkEnter = this.checkEnter.bind(this)
+      this.submit = this.submit.bind(this)
+    }
+
+    changeSolveSymbol = e => this.setState({solveSymbol: e.target.value})
+
+    checkEnter = e => e.key === 'Enter' ? this.submit() : null
+
+    submit = _ => {
+      changeRotat(this.state.solveSymbol)
+      this.setState({solveSymbol: ''})
+    }
+
+    render = _ => (
+      <div id='inputArea'>
+        <input type='text' name='solveSymbol' className='symbolText' value={this.state.solveSymbol} onChange={this.changeSolveSymbol} onKeyDown={this.checkEnter} />
+        <a className='btn' onClick={this.submit}>submit</a>
+      </div>
+    )
+  }
+
+  const Content = _ => (
+    <div>
+      <a href='https://tribox.com/3x3x3/solution/notation/' target='_blank'>回転記号一覧</a>
+      <InputArea />
+    </div>
+  )
+
+  ReactDOM.render(
+    <Content />,
+    document.getElementById('root')
+  )
+</script>
+
+</html>
