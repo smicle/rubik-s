@@ -1,3 +1,3 @@
 interface JQuery {
-  gscramble(s: string) : jQuery;
+  gscramble(s: string) : jQuery
 }

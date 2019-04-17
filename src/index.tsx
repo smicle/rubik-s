@@ -1,7 +1,7 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import './gcube.min.js';
-import './style.css';
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import './gcube.min.js'
+import './style.css'
 
 const checkSymbol = (v: string) => {
   switch (v.slice(0, 1)) {

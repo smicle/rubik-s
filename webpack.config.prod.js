@@ -5,44 +5,39 @@ module.exports = {
     mode: 'production',
     entry: './src/index.tsx',
     module: {
-        rules: [
-            {
-                enforce: 'pre',
-                test: /\.tsx?$/,
-                loader: 'tslint-loader',
-                exclude: [
-                    /node_modules/
-                ],
-                options: {
-                    emitErrors: true
-                }
-            },
-            {
-                test: /\.tsx?$/,
-                loader: 'ts-loader',
-                exclude: [
-                    /node_modules/
-                ],
-                options: {
-                    configFile: 'tsconfig.prod.json'
-                }
-            },
-            {
-                test: /\.css/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            url: false
-                        }
-                    }
-                ]
+        rules: [{
+            enforce: 'pre',
+            test: /\.tsx?$/,
+            loader: 'tslint-loader',
+            exclude: [
+                /node_modules/
+            ],
+            options: {
+                emitErrors: true
             }
-        ]
+        }, {
+            test: /\.tsx?$/,
+            loader: 'ts-loader',
+            exclude: [
+                /node_modules/
+            ],
+            options: {
+                configFile: 'tsconfig.prod.json'
+            }
+        }, {
+            test: /\.css/,
+            use: [
+                'style-loader', {
+                    loader: 'css-loader',
+                    options: {
+                        url: false
+                    }
+                }
+            ]
+        }]
     },
     resolve: {
-        extensions: [ '.tsx', '.ts', '.js' ]
+        extensions: ['.tsx', '.ts', '.js']
     },
     output: {
         filename: 'static/js/bundle.js',
@@ -56,4 +51,4 @@ module.exports = {
             template: "index.html"
         })
     ]
-};
+}
