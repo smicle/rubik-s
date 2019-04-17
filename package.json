@@ -26,17 +26,21 @@
     "react-dom": "^16.8.6"
   },
   "name": "webpack-typescript-react-sample",
-  "description": "Sample starter kit of react in TypeScript with webpack.",
+  "description": "[heroku](https://rubik-s.herokuapp.com/)",
   "version": "1.0.0",
   "main": "webpack.config.dev.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IgnorantCoder/webpack-typescript-react-sample.git"
+    "url": "git+https://github.com/smicle/rubiks.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/IgnorantCoder/webpack-typescript-react-sample/issues"
+    "url": "https://github.com/smicle/rubiks/issues"
   },
-  "homepage": "https://github.com/IgnorantCoder/webpack-typescript-react-sample#readme"
+  "homepage": "https://github.com/smicle/rubiks#readme",
+  "engines": {
+    "node": "8.11.0",
+    "npm": "6.9.0"
+  }
 }
