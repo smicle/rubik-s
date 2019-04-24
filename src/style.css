@@ -42,7 +42,8 @@ html {
   font-weight: bold;
   font-size: 26px;
   color: #799dec;
-  text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.32), 0px 1px 0px #6182ca, 0px 2px 0px #4f6aa7, 0px 1px 0px #5470ad;
+  text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.32), 0px 1px 0px #6182ca,
+    0px 2px 0px #4f6aa7, 0px 1px 0px #5470ad;
 }
 .btn:active {
   margin-top: 2px;
